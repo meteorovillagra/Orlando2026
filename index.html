@@ -501,45 +501,60 @@ const disneyParks = [
     extraNote: "ℹ️ Guardians <b>no tiene</b> Virtual Queue gratuita (se eliminó en feb 2025). Hoy es Single Pass de pago o fila estándar (standby) gratuita."
   },
   {
-    name: "Hollywood Studios",
+    name: "Disney's Hollywood Studios",
     sub: "Rope Drop: Slinky Dog Dash",
-    ropeDrop: "<b>Early Entry (30 min):</b> Slinky Dog Dash, salvo que ya tengan Single Pass de Rise para temprano.",
+    ropeDrop: "<b>Early Entry (30 min):</b> Ir directo a Slinky Dog Dash en Toy Story Land, salvo que ya tengan Single Pass de Rise of the Resistance reservado para temprano.",
     badgesBlock: [
+      {label:"Star Wars: Rise of the Resistance", tags:["single"]},
       {label:"Slinky Dog Dash", tags:["tier1"]},
+      {label:"Mickey & Minnie's Runaway Railway", tags:["tier1"]},
       {label:"Millennium Falcon: Smugglers Run", tags:["tier1","sr"]},
-      {label:"Rock 'n' Roller Coaster", tags:["tier1"]},
-      {label:"Rise of the Resistance", tags:["single"]},
+      {label:"Rock 'n' Roller Coaster Starring The Muppets", tags:["tier1"]},
       {label:"Toy Story Mania!", tags:["tier2"]},
-      {label:"Tower of Terror", tags:["tier2"]},
+      {label:"The Twilight Zone Tower of Terror", tags:["tier2"]},
+      {label:"Star Tours – The Adventures Continue", tags:["tier2"]}
     ],
-    picks: "<b>Selección inicial:</b> Tier 1 único → Slinky Dog Dash. Tier 2 → Toy Story Mania! + Tower of Terror. Rise of the Resistance es Single Pass: cómprenlo primero de TODO Walt Disney World.",
-    groupAttractions: ["Toy Story Mania!","Slinky Dog Dash","Frozen Sing-Along","Muppet*Vision 3D","Alien Swirling Saucers"],
+    picks: "<b>Selección inicial (7 AM, día -7):</b> Single Pass ➔ Rise of the Resistance (comprar primero de todo Disney World). Multi Pass: Tier 1 único ➔ Slinky Dog Dash; Tier 2 ➔ Toy Story Mania! + Tower of Terror.",
+    groupAttractions: [
+      "Show Nocturno de Cierre: Fantasmic! (Anfiteatro de agua y fuego)",
+      "Nuevo Show Live: Disney Villains - Unfairly Ever After",
+      "For the First Time in Forever: Frozen Sing-Along Celebration",
+      "Indiana Jones Epic Stunt Spectacular (Show con A/C)",
+      "Beauty and the Beast – Live on Stage"
+    ],
     itinerary: [
-      ["Mañana","Toy Story Land (Slinky Dog, Toy Story Mania) → Galaxy's Edge (Smugglers Run, Rise vía Single Pass)."],
-      ["Mediodía","Almuerzo en Docking Bay 7 o ABC Commissary. Descanso en Muppet*Vision 3D o Beauty and the Beast."],
-      ["Tarde/Noche","Sunset Blvd (Tower of Terror, Rock 'n' Roller Coaster) y repetir Smugglers Run. Reencuentro frente al Chinese Theatre."]
+      ["Mañana","Toy Story Land (Slinky Dog, Toy Story Mania) ➔ Galaxy's Edge (Smugglers Run, Rise vía Single Pass, Star Tours)."],
+      ["Mediodía","Almuerzo en Docking Bay 7 o ABC Commissary. Descanso bajo A/C en el nuevo show Disney Villains o Frozen Sing-Along."],
+      ["Tarde/Noche","Mickey & Minnie's Runaway Railway ➔ Sunset Blvd (Tower of Terror, Rock 'n' Roller Coaster). Cierre espectacular con el show Fantasmic!"]
     ],
-    extraNote: "⚡ Smugglers Run tiene fila Single Rider confiable — buena opción para el Subgrupo 3 en una segunda vuelta."
+    extraNote: "⚡ Smugglers Run tiene fila Single Rider confiable para el Subgrupo 3. Fantasmic! requiere llegar 45 min antes al anfiteatro."
   },
   {
-    name: "Animal Kingdom",
+    name: "Disney's Animal Kingdom",
     sub: "Rope Drop: Na'vi River Journey (Pandora)",
-    ropeDrop: "<b>Early Entry (30 min):</b> Na'vi River Journey (o Flight of Passage) en Pandora. <b>Kilimanjaro Safaris NO abre en Early Entry</b> — es a las 9:00 AM, apertura general.",
+    ropeDrop: "<b>Early Entry (30 min):</b> Na'vi River Journey (o Flight of Passage) en Pandora. <b>Kilimanjaro Safaris NO abre en Early Entry</b> — abre a las 9:00 AM con la apertura general del parque.",
     badgesBlock: [
       {label:"Avatar Flight of Passage", tags:["single"]},
       {label:"Na'vi River Journey", tags:["early"]},
       {label:"Expedition Everest", tags:["sr"]},
       {label:"Kilimanjaro Safaris", tags:[]},
+      {label:"Kali River Rapids (Agua)", tags:[]}
     ],
-    picks: "<b>Selección inicial (sin tiers):</b> Na'vi River Journey + Expedition Everest + Kilimanjaro Safaris. Flight of Passage es Single Pass, cómprenlo primero.",
-    groupAttractions: ["Na'vi River Journey","It's Tough to be a Bug","Festival of the Lion King","Gorilla Falls Exploration Trail"],
+    picks: "<b>Selección inicial (sin tiers):</b> Na'vi River Journey + Expedition Everest + Kilimanjaro Safaris. Flight of Passage es Single Pass: cómprenlo primero.",
+    groupAttractions: [
+      "Festival of the Lion King (Show espectacular con A/C)",
+      "Nuevo Show 3D: Zootopia - Better Zoogether! (En el Árbol de la Vida)",
+      "Show Musical: Finding Nemo - The Big Blue... and Beyond! (A/C)",
+      "Senderos: Gorilla Falls & Maharajah Jungle Trek (Animales reales)",
+      "Proyecciones Nocturnas: Tree of Life Awakens"
+    ],
     itinerary: [
-      ["Mañana","Africa (Safaris 9 AM, Gorilla Falls) → Asia (Everest, Kali River Rapids) → Pandora (lo que falte)."],
-      ["Mediodía","Almuerzo en Pizzafari o Satu'li Canteen. Descanso en Festival of the Lion King."],
-      ["Tarde/Noche","Repetir Safaris o profundizar en Asia/Pandora. AK cierra temprano — salir con margen. Reencuentro en el Árbol de la Vida."]
+      ["Mañana","Pandora (Na'vi River / Flight of Passage) ➔ Africa (Kilimanjaro Safaris a las 9:00 AM, Gorilla Falls) ➔ Asia (Expedition Everest, Kali River Rapids)."],
+      ["Mediodía","Almuerzo en Satu'li Canteen (Pandora) o Pizzafari. Descanso bajo A/C con Festival of the Lion King o Finding Nemo."],
+      ["Tarde/Noche","Nuevo show 3D de Zootopia en el Árbol de la Vida. Repetir Safaris por la tarde (buena luz para fotos). Cierre con proyecciones Tree of Life Awakens."]
     ],
-    extraNote: "⚠️ <b>DinoLand U.S.A. / DINOSAUR cerrado en forma permanente</b> desde feb 2026 (reapertura como Tropical Americas prevista 2027). No planificar nada ahí."
-  }
+    extraNote: "⚠️ <b>DinoLand U.S.A. / DINOSAUR cerrado permanentemente:</b> la zona está en obras para Tropical Americas (Encanto/Indiana Jones 2027). No planificar nada allí."
+  },
 ];
 
 const universalParks = [
