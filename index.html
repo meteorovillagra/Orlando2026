@@ -439,48 +439,66 @@ const checklistItems = [
 const disneyParks = [
   {
     name: "Magic Kingdom",
-    sub: "Rope Drop: TRON Lightcycle / Run",
+    sub: "Rope Drop: Seven Dwarfs / TRON",
     ropeDrop: "<b>Early Entry (30 min):</b> TRON Lightcycle/Run en fila estándar, o Seven Dwarfs Mine Train si ya tienen Single Pass de TRON para después.",
     badgesBlock: [
+      {label:"TRON Lightcycle / Run", tags:["single","sr"]},
+      {label:"Seven Dwarfs Mine Train", tags:["single"]},
       {label:"Tiana's Bayou Adventure", tags:["tier1"]},
       {label:"Jungle Cruise", tags:["tier1"]},
       {label:"Peter Pan's Flight", tags:["tier1"]},
       {label:"Space Mountain", tags:["tier1"]},
       {label:"Big Thunder Mountain", tags:["tier1"]},
-      {label:"Seven Dwarfs Mine Train", tags:["single"]},
       {label:"Haunted Mansion", tags:["tier2"]},
-      {label:"Buzz Lightyear", tags:["tier2"]},
+      {label:"Buzz Lightyear's Space Ranger Spin", tags:["tier2"]},
+      {label:"Pirates of the Caribbean", tags:["tier2"]}
     ],
-    picks: "<b>Selección inicial (7 AM, día -7):</b> Tier 1 único → Tiana's Bayou Adventure. Tier 2 → Haunted Mansion + Buzz Lightyear/Jungle Cruise. Seven Dwarfs Mine Train se compra aparte como Single Pass, primero de todo.",
-    groupAttractions: ["Pirates of the Caribbean","Jungle Cruise","\"it's a small world\"","Winnie the Pooh","Haunted Mansion","Peter Pan's Flight","Buzz Lightyear","Under the Sea","Mad Tea Party","The Barnstormer"],
+    picks: "<b>Selección inicial (7 AM, día -7):</b> Single Pass ➔ TRON y Seven Dwarfs. Multi Pass: Tier 1 único ➔ Tiana's Bayou Adventure; Tier 2 ➔ Haunted Mansion + Buzz Lightyear.",
+    groupAttractions: [
+      "Fuegos Artificiales: Happily Ever After",
+      "Desfile Nocturno: Disney Starlight (Dream the Night Away)",
+      "Desfile de Tarde: Festival of Fantasy Parade",
+      "Monsters, Inc. Laugh Floor (Show con A/C)",
+      "Country Bear Jamboree (Show con A/C)",
+      "\"it's a small world\" & Winnie the Pooh",
+      "Under the Sea & Mad Tea Party"
+    ],
     itinerary: [
-      ["Mañana","Fantasyland (Mine Train, Peter Pan, Pooh, Small World) → Liberty Square (Haunted Mansion, Tiana's) → Frontierland (Big Thunder)."],
-      ["Mediodía","Almuerzo en Columbia Harbour House o Pecos Bill. Descanso en Country Bear Jamboree. Adultos usan su Single Pass acá."],
-      ["Tarde/Noche","Multi Pass restante en Tomorrowland y Adventureland. Reencuentro en el Castle Hub. Vista de fuegos frente al Partners Statue."]
+      ["Mañana","Fantasyland (Mine Train, Peter Pan, Pooh, Small World) ➔ Liberty Square (Haunted Mansion, Tiana's) ➔ Frontierland (Big Thunder)."],
+      ["Mediodía","Almuerzo en Columbia Harbour House o Pecos Bill. Descanso en Country Bear Jamboree o Monsters, Inc. Laugh Floor (A/C). 15:00 hs: Ver el desfile Festival of Fantasy."],
+      ["Tarde/Noche","Tomorrowland (TRON, Space Mountain, Buzz) y Adventureland (Pirates, Jungle Cruise). Ver el desfile nocturno Disney Starlight y el show Happily Ever After frente al Partners Statue."]
     ],
-    extraNote: "🚌 <b>Bus directo All-Star Movies → molinetes de MK</b>, sin pasar por el TTC (a diferencia de auto/Uber/Lyft). Ahorra 20-30 min reales."
+    extraNote: "🚌 <b>Bus directo All-Star Movies ➔ molinetes de MK</b>, sin pasar por el TTC (a diferencia de auto/Uber/Lyft). Ahorra 20-30 min reales."
   },
   {
     name: "EPCOT",
     sub: "Rope Drop: Frozen Ever After",
-    ropeDrop: "<b>Early Entry (30 min):</b> Frozen Ever After si World Showcase abre temprano ese día; si no, Spaceship Earth/Test Track primero.",
+    ropeDrop: "<b>Early Entry (30 min):</b> Frozen Ever After (Noruega) si World Showcase abre temprano; si no, Spaceship Earth o Test Track primero.",
     badgesBlock: [
+      {label:"Guardians of the Galaxy: Cosmic Rewind", tags:["single"]},
       {label:"Frozen Ever After", tags:["tier1"]},
       {label:"Remy's Ratatouille Adventure", tags:["tier1"]},
-      {label:"Test Track", tags:["tier1"]},
-      {label:"Guardians of the Galaxy: Cosmic Rewind", tags:["single"]},
-      {label:"Soarin'", tags:["tier2"]},
+      {label:"Test Track 3.0", tags:["tier1"]},
+      {label:"Soarin' Around the World", tags:["tier2"]},
       {label:"Spaceship Earth", tags:["tier2"]},
       {label:"Mission: SPACE", tags:["tier2"]},
+      {label:"The Seas with Nemo & Friends", tags:["tier2"]},
+      {label:"Living with the Land", tags:["tier2"]}
     ],
-    picks: "<b>Selección inicial:</b> Tier 1 único → Frozen Ever After. Tier 2 → Soarin' + Spaceship Earth/Mission: SPACE. Guardians es Single Pass aparte, cómprenlo primero.",
-    groupAttractions: ["Frozen Ever After","Spaceship Earth","Living with the Land","The Seas with Nemo","Remy's Ratatouille Adventure","Gran Fiesta Tour"],
+    picks: "<b>Selección inicial (7 AM, día -7):</b> Single Pass ➔ Guardians. Multi Pass: Tier 1 único ➔ Frozen Ever After; Tier 2 ➔ Soarin' + Spaceship Earth.",
+    groupAttractions: [
+      "Show Nocturno: Luminous - The Symphony of Us (Fuegos y Fuentes)",
+      "Recorrer los 11 Pabellones de World Showcase",
+      "Gran Fiesta Tour Starring The Three Caballeros (México)",
+      "Turtle Talk with Crush (Show interactivo con A/C)",
+      "Journey Into Imagination With Figment"
+    ],
     itinerary: [
-      ["Mañana","World Celebration/Discovery (Spaceship Earth, Guardians) → World Showcase por Norway/México (Frozen, Gran Fiesta Tour, Remy's en Francia)."],
-      ["Mediodía","Almuerzo en Sunshine Seasons. Recorrido con A/C por pabellones. Paseo en Living with the Land."],
-      ["Tarde/Noche","Completar World Showcase en un solo sentido. Multi Pass en Test Track. Reencuentro en la laguna frente a Italia/Alemania."]
+      ["Mañana","World Celebration/Discovery (Spaceship Earth, Guardians) ➔ World Showcase por Norway/México (Frozen, Gran Fiesta Tour, Remy's en Francia)."],
+      ["Mediodía","Almuerzo en Sunshine Seasons (The Land). Descanso con A/C recorriendo pabellones. Paseo en Living with the Land."],
+      ["Tarde/Noche","Completar World Showcase en un solo sentido. Multi Pass en Test Track o Soarin'. Cierre con el show nocturno Luminous en la laguna frente a Italia/Alemania."]
     ],
-    extraNote: "ℹ️ Guardians <b>no tiene</b> Virtual Queue gratuita (se eliminó el 25 feb 2025). Hoy es Single Pass o fila estándar gratuita, sin horario de anotación."
+    extraNote: "ℹ️ Guardians <b>no tiene</b> Virtual Queue gratuita (se eliminó en feb 2025). Hoy es Single Pass de pago o fila estándar (standby) gratuita."
   },
   {
     name: "Hollywood Studios",
