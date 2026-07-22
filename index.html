@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orlando 2026 · Plan del Grupo</title>
+<style>
+  :root{
+    --bg: #12181f;
+    --surface: #1b2430;
+    --surface-2: #232e3c;
+    --stub-edge: #0e131a;
+    --text: #f4efe4;
+    --muted: #93a1b0;
+    --coral: #ff6b4a;
+    --amber: #ffb347;
+    --teal: #2dd4bf;
+    --line: rgba(244,239,228,0.09);
+
+    --tier1-bg:#ff8a3d; --tier1-fg:#3a1900;
+    --tier2-bg:#3d8bff; --tier2-fg:#eaf2ff;
+    --single-bg:#e8c15a; --single-fg:#3a2c00;
+    --early-bg:#a06bff; --early-fg:#f3ecff;
+    --noex-bg:#ff5b6a; --noex-fg:#3a0006;
+    --sr-bg:#2fbf83; --sr-fg:#04180d;
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{margin:0; padding:0; overflow-x:hidden;}
+  body{
+    background: radial-gradient(1200px 800px at 50% -10%, #1a2431 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display:flex;
+    justify-content:center;
+  }
+
+  #app{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    background: var(--bg);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  }
+
+  /* ---------- HEADER ---------- */
+  header.top{
+    padding: 22px 18px 16px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #1a2431, transparent);
+  }
+  .eyebrow{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 3px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 6px;
+  }
+  h1.title{
+    margin:0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height:1.15;
+  }
+  h1.title span{ color: var(--coral); }
+  .subtitle{
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ---------- TAB PANELS ---------- */
+  main{
+    flex:1;
+    padding: 16px 14px 100px;
+    overflow-y:auto;
+  }
+  .panel{ display:none; animation: fadeIn .18s ease; }
+  .panel.active{ display:block; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .section-label{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 18px 4px 10px;
+    font-weight:700;
+  }
+  .section-label:first-child{ margin-top:2px; }
+
+  /* ---------- KEY DATE CARDS (Inicio) ---------- */
+  .date-row{ display:flex; gap:10px; margin-bottom:14px; }
+  .date-card{
+    flex:1;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 14px 12px;
+    border: 1px solid var(--line);
+  }
+  .date-num{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--coral);
+    line-height:1;
+  }
+  .date-desc{ font-size: 12px; color: var(--muted); margin-top: 6px; line-height:1.4; }
+
+  /* ---------- CHECKLIST ---------- */
+  .check-item{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 13px 14px;
+    margin-bottom: 8px;
+    min-height: 44px;
+  }
+  .check-item .box{
+    width: 26px; height:26px; min-width:26px;
+    border-radius: 8px;
+    border: 2px solid var(--muted);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 15px;
+    color: transparent;
+    transition: all .15s ease;
+    margin-top:1px;
+  }
+  .check-item.done .box{
+    background: var(--sr-bg);
+    border-color: var(--sr-bg);
+    color: #04180d;
+  }
+  .check-item .txt{ font-size: 14px; line-height:1.45; padding-top:2px; }
+  .check-item.done .txt{ color: var(--muted); text-decoration: line-through; }
+  .tap-row{ cursor:pointer; }
+
+  /* ---------- ACCORDIONS (Ticket-stub style) ---------- */
+  .stub{
+    position:relative;
+    background: var(--surface);
+    border-radius: 16px;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
+    overflow:hidden;
+  }
+  .stub::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; top:56px;
+    height:0;
+    border-top: 2px dashed rgba(244,239,228,0.16);
+    z-index:1;
+    pointer-events:none;
+  }
+  .stub.no-notch::before{ display:none; }
+  .stub-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding: 14px 16px;
+    min-height:44px;
+  }
+  .stub-head .htxt{ flex:1; }
+  .stub-head .park-name{ font-size:16px; font-weight:800; letter-spacing:-0.2px; }
+  .stub-head .park-sub{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .chev{
+    width:30px; height:30px;
+    border-radius:50%;
+    background: var(--surface-2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    transition: transform .2s ease;
+    flex-shrink:0;
+  }
+  .stub.open .chev{ transform: rotate(180deg); }
+
+  .stub-body{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height .28s ease;
+    padding: 0 16px;
+  }
+  .stub.open .stub-body{ padding: 8px 16px 18px; }
+
+  .rope-drop{
+    margin: 0 16px 14px;
+    background: linear-gradient(135deg, rgba(160,107,255,0.18), rgba(255,107,74,0.10));
+    border: 1px solid rgba(160,107,255,0.35);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height:1.5;
+  }
+  .rope-drop b{ color: var(--amber); }
+
+  .block-title{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--teal);
+    font-weight: 800;
+    margin: 16px 0 8px;
+  }
+  .block-title:first-of-type{ margin-top:4px; }
+
+  .attraction-list{ list-style:none; margin:0; padding:0; }
+  .attraction-list li{
+    display:flex; align-items:center; gap:10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+    line-height:1.4;
+  }
+  .attraction-list li:last-child{ border-bottom:none; }
+  .attraction-list li .box{
+    width:22px; height:22px; min-width:22px;
+    border-radius:6px;
+    border: 2px solid var(--muted);
+    flex-shrink:0;
+  }
+  .attraction-list li.done .box{ background:var(--sr-bg); border-color:var(--sr-bg); }
+  .attraction-list li.done .aname{ color:var(--muted); text-decoration:line-through; }
+  .aname{ flex:1; }
+
+  p.body-text{ font-size:13.5px; line-height:1.6; color: #dfe4ea; margin: 8px 0; }
+  p.body-text b{ color: var(--text); }
+  p.body-text.muted{ color: var(--muted); font-size:12.5px; }
+
+  /* ---------- BADGES ---------- */
+  .badge{
+    display:inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin: 2px 4px 2px 0;
+    white-space:nowrap;
+  }
+  .b-tier1{ background: var(--tier1-bg); color: var(--tier1-fg); }
+  .b-tier2{ background: var(--tier2-bg); color: var(--tier2-fg); }
+  .b-single{ background: var(--single-bg); color: var(--single-fg); }
+  .b-early{ background: var(--early-bg); color: var(--early-fg); }
+  .b-noex{ background: var(--noex-bg); color: var(--noex-fg); }
+  .b-sr{ background: var(--sr-bg); color: var(--sr-fg); }
+
+  .badge-row{ margin: 4px 0 10px; line-height:2.1; }
+
+  .warn-box{
+    background: rgba(255,91,106,0.12);
+    border: 1px solid rgba(255,91,106,0.4);
+    border-radius: 12px;
+    padding: 12px 13px;
+    font-size: 12.5px;
+    line-height:1.55;
+    margin: 10px 0;
+  }
+  .warn-box b{ color: var(--noex-bg); }
+
+  .info-box{
+    background: rgba(45,212,191,0.10);
+    border: 1px solid rgba(45,212,191,0.35);
+    border-radius: 12px;
+    padding: 12px 13px;
+    font-size: 12.5px;
+    line-height:1.55;
+    margin: 10px 0;
+  }
+  .info-box b{ color: var(--teal); }
+
+  .tip-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 12px;
+  }
+  .tip-card h3{
+    margin:0 0 8px;
+    font-size: 14.5px;
+    font-weight:800;
+    display:flex; align-items:center; gap:8px;
+  }
+  .tip-card h3 .ic{
+    width:32px; height:32px; border-radius:9px;
+    background: var(--surface-2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+
+  /* ---------- BOTTOM NAV ---------- */
+  nav.bottom{
+    position: sticky;
+    bottom:0;
+    left:0; right:0;
+    display:flex;
+    background: rgba(27,36,48,0.92);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    padding: 6px 4px calc(8px + env(safe-area-inset-bottom));
+    z-index: 20;
+  }
+  nav.bottom button{
+    flex:1;
+    background:none;
+    border:none;
+    color: var(--muted);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    padding: 8px 2px;
+    min-height:52px;
+    font-family:inherit;
+    font-size: 10.5px;
+    font-weight:600;
+    letter-spacing: 0.2px;
+    border-radius: 12px;
+    transition: color .15s ease, background .15s ease;
+  }
+  nav.bottom button .navicon{ font-size:20px; line-height:1; }
+  nav.bottom button.active{
+    color: var(--coral);
+    background: rgba(255,107,74,0.10);
+  }
+
+  ::-webkit-scrollbar{ display:none; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header class="top">
+    <p class="eyebrow">Grupo de 8 · 3 habitaciones</p>
+    <h1 class="title">Orlando <span>Oct 2026</span></h1>
+    <p class="subtitle">All-Star Movies + Terra Luna Resort (South Campus)</p>
+  </header>
+
+  <main>
+
+    <!-- ============ PANEL 1: INICIO ============ -->
+    <section class="panel active" id="panel-inicio">
+
+      <p class="section-label">Fechas clave</p>
+      <div class="date-row">
+        <div class="date-card">
+          <div class="date-num">12 AGO</div>
+          <div class="date-desc">60 días antes del viaje · 6:00 AM ET (Reservar restaurantes de mesa para los 8)</div>
+        </div>
+        <div class="date-card">
+          <div class="date-num">4 OCT</div>
+          <div class="date-desc">7 días antes del viaje · 7:00 AM ET (Comprar Pases Rápidos / Lightning Lane para los 8)</div>
+        </div>
+      </div>
+
+      <p class="section-label">Vinculación My Disney Experience</p>
+      <div class="stub no-notch">
+        <div class="stub-head tap-row" onclick="toggleStub(this)">
+          <div class="htxt">
+            <div class="park-name">Friends &amp; Family</div>
+            <div class="park-sub">Cómo reservar para los 8 en una sola operación</div>
+          </div>
+          <div class="chev">⌄</div>
+        </div>
+        <div class="stub-body">
+          <p class="body-text">1. Una sola persona debe tener las 3 reservas de hotel vinculadas a su perfil, o las otras 2 la agregan como <b>Family &amp; Friends</b>.</p>
+          <p class="body-text">2. Cada adulto responsable de una habitación <b>acepta la solicitud</b> dentro de la app para que los 8 perfiles queden vinculados.</p>
+          <p class="body-text">3. Ya vinculados, <b>cualquier admin</b> reserva Lightning Lane para los 8 en la misma transacción a las 7:00 AM.</p>
+          <p class="body-text muted">Tip: que reserve una sola persona (mejor conexión, practicando antes) en vez de que los 3 adultos intenten a la vez — se pisan la disponibilidad entre ustedes mismos.</p>
+        </div>
+      </div>
+
+      <p class="section-label">Checklist del viaje</p>
+      <div id="checklist-container"></div>
+
+    </section>
+
+    <!-- ============ PANEL 2: DISNEY ============ -->
+    <section class="panel" id="panel-disney">
+      <p class="section-label">Los 4 parques</p>
+      <div id="disney-container"></div>
+    </section>
+
+    <!-- ============ PANEL 3: UNIVERSAL ============ -->
+    <section class="panel" id="panel-universal">
+      <p class="section-label">Los 3 parques</p>
+      <div id="universal-container"></div>
+    </section>
+
+    <!-- ============ PANEL 4: HALLOWEEN ============ -->
+    <section class="panel" id="panel-halloween">
+      <p class="section-label">Eventos especiales</p>
+      <div id="halloween-container"></div>
+    </section>
+
+    <!-- ============ PANEL 5: TIPS ============ -->
+    <section class="panel" id="panel-tips">
+      <p class="section-label">Trucos pro</p>
+      <div id="tips-container"></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom" id="bottomNav">
+    <button data-tab="inicio" class="active"><span class="navicon">📅</span>Inicio</button>
+    <button data-tab="disney"><span class="navicon">🏰</span>Disney</button>
+    <button data-tab="universal"><span class="navicon">🌐</span>Universal</button>
+    <button data-tab="halloween"><span class="navicon">🎃</span>Halloween</button>
+    <button data-tab="tips"><span class="navicon">⚡</span>Tips</button>
+  </nav>
+
+</div>
+
+<script>
+/* ================= DATA ================= */
+
+const checklistItems = [
+  "Vincular las 3 habitaciones vía Friends &amp; Family en My Disney Experience y designar un solo admin para las reservas de las 7:00 AM.",
+  "Miércoles 12 de Agosto (6:00 AM): reservar restaurantes de mesa para 8 personas (con alternativas listas).",
+  "Domingo 4 de Octubre (7:00 AM): comprar primero los Single Pass (Rise → Flight of Passage → Cosmic Rewind/Mine Train/TRON), luego el Multi Pass de cada parque (1 Tier 1 + 2 Tier 2).",
+  "Animal Kingdom: nada en DinoLand U.S.A. — cerrado hasta 2027. Kilimanjaro Safaris es a las 9:00 AM (apertura general), no en Early Entry.",
+  "Guardians of the Galaxy (EPCOT): no hay Virtual Queue gratuita — es Single Pass o fila estándar gratuita, sin horario de anotación.",
+  "Universal (USF e IOA): sumar 20 min de bus desde Terra Luna Resort (South Campus) al horario de salida, sobre todo el día de Hagrid's.",
+  "Epic Universe: confirmar si el Express ya comprado cubre este parque. Dragon Racer's Rally sigue sin Express.",
+  "Subgrupo 3: usar Single Rider en Smugglers Run, Everest, Test Track (Disney) y Gringotts, Hulk, VelociCoaster (Universal).",
+  "Magic Kingdom: usar el bus de All-Star Movies que deja directo en los molinetes, sin pasar por el TTC.",
+  "MNSSHP: ingreso 4:00 PM. HHN: confirmar si el Subgrupo 2 (familia) asiste o descansa esa noche."
+];
+
+const disneyParks = [
+  {
+    name: "Magic Kingdom",
+    sub: "Rope Drop: TRON Lightcycle / Run",
+    ropeDrop: "<b>Early Entry (30 min):</b> TRON Lightcycle/Run en fila estándar, o Seven Dwarfs Mine Train si ya tienen Single Pass de TRON para después.",
+    badgesBlock: [
+      {label:"Tiana's Bayou Adventure", tags:["tier1"]},
+      {label:"Jungle Cruise", tags:["tier1"]},
+      {label:"Peter Pan's Flight", tags:["tier1"]},
+      {label:"Space Mountain", tags:["tier1"]},
+      {label:"Big Thunder Mountain", tags:["tier1"]},
+      {label:"Seven Dwarfs Mine Train", tags:["single"]},
+      {label:"Haunted Mansion", tags:["tier2"]},
+      {label:"Buzz Lightyear", tags:["tier2"]},
+    ],
+    picks: "<b>Selección inicial (7 AM, día -7):</b> Tier 1 único → Tiana's Bayou Adventure. Tier 2 → Haunted Mansion + Buzz Lightyear/Jungle Cruise. Seven Dwarfs Mine Train se compra aparte como Single Pass, primero de todo.",
+    groupAttractions: ["Pirates of the Caribbean","Jungle Cruise","\"it's a small world\"","Winnie the Pooh","Haunted Mansion","Peter Pan's Flight","Buzz Lightyear","Under the Sea","Mad Tea Party","The Barnstormer"],
+    itinerary: [
+      ["Mañana","Fantasyland (Mine Train, Peter Pan, Pooh, Small World) → Liberty Square (Haunted Mansion, Tiana's) → Frontierland (Big Thunder)."],
+      ["Mediodía","Almuerzo en Columbia Harbour House o Pecos Bill. Descanso en Country Bear Jamboree. Adultos usan su Single Pass acá."],
+      ["Tarde/Noche","Multi Pass restante en Tomorrowland y Adventureland. Reencuentro en el Castle Hub. Vista de fuegos frente al Partners Statue."]
+    ],
+    extraNote: "🚌 <b>Bus directo All-Star Movies → molinetes de MK</b>, sin pasar por el TTC (a diferencia de auto/Uber/Lyft). Ahorra 20-30 min reales."
+  },
+  {
+    name: "EPCOT",
+    sub: "Rope Drop: Frozen Ever After",
+    ropeDrop: "<b>Early Entry (30 min):</b> Frozen Ever After si World Showcase abre temprano ese día; si no, Spaceship Earth/Test Track primero.",
+    badgesBlock: [
+      {label:"Frozen Ever After", tags:["tier1"]},
+      {label:"Remy's Ratatouille Adventure", tags:["tier1"]},
+      {label:"Test Track", tags:["tier1"]},
+      {label:"Guardians of the Galaxy: Cosmic Rewind", tags:["single"]},
+      {label:"Soarin'", tags:["tier2"]},
+      {label:"Spaceship Earth", tags:["tier2"]},
+      {label:"Mission: SPACE", tags:["tier2"]},
+    ],
+    picks: "<b>Selección inicial:</b> Tier 1 único → Frozen Ever After. Tier 2 → Soarin' + Spaceship Earth/Mission: SPACE. Guardians es Single Pass aparte, cómprenlo primero.",
+    groupAttractions: ["Frozen Ever After","Spaceship Earth","Living with the Land","The Seas with Nemo","Remy's Ratatouille Adventure","Gran Fiesta Tour"],
+    itinerary: [
+      ["Mañana","World Celebration/Discovery (Spaceship Earth, Guardians) → World Showcase por Norway/México (Frozen, Gran Fiesta Tour, Remy's en Francia)."],
+      ["Mediodía","Almuerzo en Sunshine Seasons. Recorrido con A/C por pabellones. Paseo en Living with the Land."],
+      ["Tarde/Noche","Completar World Showcase en un solo sentido. Multi Pass en Test Track. Reencuentro en la laguna frente a Italia/Alemania."]
+    ],
+    extraNote: "ℹ️ Guardians <b>no tiene</b> Virtual Queue gratuita (se eliminó el 25 feb 2025). Hoy es Single Pass o fila estándar gratuita, sin horario de anotación."
+  },
+  {
+    name: "Hollywood Studios",
+    sub: "Rope Drop: Slinky Dog Dash",
+    ropeDrop: "<b>Early Entry (30 min):</b> Slinky Dog Dash, salvo que ya tengan Single Pass de Rise para temprano.",
+    badgesBlock: [
+      {label:"Slinky Dog Dash", tags:["tier1"]},
+      {label:"Millennium Falcon: Smugglers Run", tags:["tier1","sr"]},
+      {label:"Rock 'n' Roller Coaster", tags:["tier1"]},
+      {label:"Rise of the Resistance", tags:["single"]},
+      {label:"Toy Story Mania!", tags:["tier2"]},
+      {label:"Tower of Terror", tags:["tier2"]},
+    ],
+    picks: "<b>Selección inicial:</b> Tier 1 único → Slinky Dog Dash. Tier 2 → Toy Story Mania! + Tower of Terror. Rise of the Resistance es Single Pass: cómprenlo primero de TODO Walt Disney World.",
+    groupAttractions: ["Toy Story Mania!","Slinky Dog Dash","Frozen Sing-Along","Muppet*Vision 3D","Alien Swirling Saucers"],
+    itinerary: [
+      ["Mañana","Toy Story Land (Slinky Dog, Toy Story Mania) → Galaxy's Edge (Smugglers Run, Rise vía Single Pass)."],
+      ["Mediodía","Almuerzo en Docking Bay 7 o ABC Commissary. Descanso en Muppet*Vision 3D o Beauty and the Beast."],
+      ["Tarde/Noche","Sunset Blvd (Tower of Terror, Rock 'n' Roller Coaster) y repetir Smugglers Run. Reencuentro frente al Chinese Theatre."]
+    ],
+    extraNote: "⚡ Smugglers Run tiene fila Single Rider confiable — buena opción para el Subgrupo 3 en una segunda vuelta."
+  },
+  {
+    name: "Animal Kingdom",
+    sub: "Rope Drop: Na'vi River Journey (Pandora)",
+    ropeDrop: "<b>Early Entry (30 min):</b> Na'vi River Journey (o Flight of Passage) en Pandora. <b>Kilimanjaro Safaris NO abre en Early Entry</b> — es a las 9:00 AM, apertura general.",
+    badgesBlock: [
+      {label:"Avatar Flight of Passage", tags:["single"]},
+      {label:"Na'vi River Journey", tags:["early"]},
+      {label:"Expedition Everest", tags:["sr"]},
+      {label:"Kilimanjaro Safaris", tags:[]},
+    ],
+    picks: "<b>Selección inicial (sin tiers):</b> Na'vi River Journey + Expedition Everest + Kilimanjaro Safaris. Flight of Passage es Single Pass, cómprenlo primero.",
+    groupAttractions: ["Na'vi River Journey","It's Tough to be a Bug","Festival of the Lion King","Gorilla Falls Exploration Trail"],
+    itinerary: [
+      ["Mañana","Africa (Safaris 9 AM, Gorilla Falls) → Asia (Everest, Kali River Rapids) → Pandora (lo que falte)."],
+      ["Mediodía","Almuerzo en Pizzafari o Satu'li Canteen. Descanso en Festival of the Lion King."],
+      ["Tarde/Noche","Repetir Safaris o profundizar en Asia/Pandora. AK cierra temprano — salir con margen. Reencuentro en el Árbol de la Vida."]
+    ],
+    extraNote: "⚠️ <b>DinoLand U.S.A. / DINOSAUR cerrado en forma permanente</b> desde feb 2026 (reapertura como Tropical Americas prevista 2027). No planificar nada ahí."
+  }
+];
+
+const universalParks = [
+  {
+    name: "Universal Studios Florida",
+    sub: "Rope Drop: Escape from Gringotts",
+    ropeDrop: "<b>Early Park Admission (1h, + 20 min de bus desde Terra Luna):</b> adultos directo a Escape from Gringotts; familia a Despicable Me Minion Mayhem.",
+    badgesBlock: [
+      {label:"Harry Potter and the Escape from Gringotts", tags:["early","sr"]},
+      {label:"Hollywood Rip Ride Rockit", tags:["early"]},
+      {label:"Revenge of the Mummy", tags:[]},
+      {label:"Race Through New York", tags:[]},
+    ],
+    picks: "Con Express ya comprado, prioricen la hora extra para Gringotts y Rip Ride Rockit — el resto del día, Express resuelve todo lo demás.",
+    groupAttractions: ["Diagon Alley (paseo, Ollivanders)","Despicable Me Minion Mayhem","E.T. Adventure","Race Through New York","Horror Make-Up Show"],
+    itinerary: [
+      ["Mañana","Diagon Alley (Gringotts vía Express, Ollivanders) → San Francisco/Amity (E.T. Adventure)."],
+      ["Mediodía","Almuerzo en Leaky Cauldron o Louie's Italian Restaurant. Descanso en Horror Make-Up Show."],
+      ["Tarde/Noche","New York (Race Through NY, Mummy vía Express) y Production Central (Rockit vía Express). Reencuentro en Diagon Alley."]
+    ],
+    extraNote: "🚌 Sumar 20 min de bus desde Terra Luna (South Campus) — salir 45-50 min antes de la apertura general."
+  },
+  {
+    name: "Islands of Adventure",
+    sub: "Rope Drop: Hagrid's Motorbike Adventure",
+    ropeDrop: "<b>Early Park Admission (1h, + 20 min de bus):</b> adultos directo a Hagrid's — es la única forma real de evitar 90+ min de fila.",
+    badgesBlock: [
+      {label:"Hagrid's Magical Creatures Motorbike Adventure", tags:["early","noex"]},
+      {label:"VelociCoaster", tags:["sr"]},
+      {label:"The Incredible Hulk Coaster", tags:["sr"]},
+      {label:"Harry Potter and the Forbidden Journey", tags:[]},
+    ],
+    picks: "Hagrid's y Pteranodon Flyers no aceptan Express — resolver Hagrid's en el bloque de Early Park Admission sin excepción.",
+    groupAttractions: ["Hogsmeade (paseo, Ollivanders)","Forbidden Journey","Skull Island: Reign of Kong","Jurassic Park River Adventure","Seuss Landing"],
+    itinerary: [
+      ["Mañana","Hogsmeade (Forbidden Journey vía Express) → Jurassic Park (River Adventure vía Express) → Skull Island (Reign of Kong vía Express)."],
+      ["Mediodía","Almuerzo en Three Broomsticks. Descanso en Seuss Landing mientras los adultos alternan VelociCoaster/Hulk."],
+      ["Tarde/Noche","Marvel Super Hero Island (Hulk, Doctor Doom's Fearfall) y repetir Forbidden Journey. Reencuentro en el puente de Hogsmeade."]
+    ],
+    extraNote: "🚌 Salir de Terra Luna con 45-50 min reales de anticipación por el traslado — es el día más crítico para eso."
+  },
+  {
+    name: "Epic Universe",
+    sub: "Rope Drop: Stardust Racers",
+    ropeDrop: "<b>Early Park Admission (1h, sin traslado — a pie desde Terra Luna):</b> Stardust Racers; si se dividen, la otra mitad resuelve Dragon Racer's Rally.",
+    badgesBlock: [
+      {label:"Stardust Racers", tags:["early"]},
+      {label:"Dragon Racer's Rally", tags:["noex"]},
+      {label:"Mario Kart: Bowser's Challenge", tags:[]},
+      {label:"Hiccup's Wing Gliders", tags:[]},
+    ],
+    picks: "Dragon Racer's Rally sigue siendo la única atracción sin Express del parque. Confirmar si el Express ya comprado cubre Epic Universe (se vende aparte, sin Unlimited).",
+    groupAttractions: ["Constellation Carousel","Yoshi's Adventure","Hiccup's Wing Gliders","Le Cirque Arcanus","Fyre Drill"],
+    itinerary: [
+      ["Mañana","Celestial Park (Constellation Carousel) → Super Nintendo World (Bowser's Challenge, Yoshi's Adventure) → Isle of Berk (Hiccup's Wing Gliders)."],
+      ["Mediodía","Almuerzo en Super Nintendo World o Celestial Park. Descanso en Le Cirque Arcanus."],
+      ["Tarde/Noche","Ministry of Magic (Monsters Unchained, Curse of the Werewolf) y repetir Stardust Racers. Reencuentro en Celestial Park."]
+    ],
+    extraNote: "🏨 Terra Luna está a distancia caminable de este parque — no aplica el ajuste de 20 min de bus."
+  }
+];
+
+const halloweenEvents = [
+  {
+    name: "MNSSHP",
+    sub: "Ingreso 4:00 PM · evento 7 PM–12 AM",
+    body: [
+      "<b>Ingreso:</b> 4:00 PM con el ticket del evento (no hace falta entrada de día).",
+      "<b>Ronda de dulces:</b> Frontierland/Adventureland al empezar, luego Fantasyland/Storybook Circus más tarde.",
+      "<b>Personajes exclusivos:</b> Storybook Circus y Liberty Square (confirmar mapa esa noche).",
+      "<b>Desfile \"Boo-to-You\":</b> posicionarse 30-40 min antes en Liberty Square o Frontierland.",
+      "<b>Fuegos \"Not-So-Spooky Spectacular\":</b> césped frente al castillo, 30 min antes.",
+      "<b>Show \"Hocus Pocus Villain Spelltacular\":</b> entre la ronda de dulces y los fuegos."
+    ],
+    order: "4:00 PM ingreso → 7:00-8:30 PM dulces → 8:30 PM desfile → 9:30 PM Hocus Pocus → ronda final de dulces → fuegos de cierre."
+  },
+  {
+    name: "HHN",
+    sub: "Universal Studios Florida · 35° edición",
+    body: [
+      "10 casas embrujadas nuevas — \"Infernal Carnival of Nightmares\" con Jack the Clown y Dr. Oddfellow.",
+      "Casas confirmadas: <i>Jack &amp; Oddfellow: Chaos &amp; Control</i>, <i>Stranger Things</i>, <i>Hellraiser</i>, <i>Evil Dead Burn</i>.",
+      "<b>Adultos/amigos:</b> priorizar casas nuevas y demandadas en la primera hora. Verificar HHN Early Entry en Terra Luna. Dejar zonas de sustos en la calle para el final.",
+      "<b>Subgrupo con menores:</b> lo más práctico es que no asista esa noche — descanso en el resort mientras el resto disfruta el evento completo.",
+      "Confirmar el horario de cierre \"de día\" de USF esa fecha puntual, ya que suele adelantarse cuando hay HHN esa misma noche."
+    ]
+  }
+];
+
+const tipCards = [
+  {
+    icon:"🟢", title:"Single Rider — Subgrupo 3",
+    body: "Herramienta gratuita para saltar buena parte de la fila estándar sin gastar pases pagos, a costa de subir separados.<br><br>" +
+    "<b>Disney:</b> Smugglers Run (confiable, casi nunca asiento de piloto), Expedition Everest (más lento desde 2026 por el nuevo sistema de carga par/impar — útil si el standby supera 30-40 min), Test Track (de las más rápidas del resort), Rock 'n' Roller Coaster (variable).<br><br>" +
+    "<b>Universal:</b> Escape from Gringotts, The Incredible Hulk Coaster (casi siempre disponibles), VelociCoaster (más variable).<br><br>" +
+    "<span style='color:var(--muted)'>Consejo: usarlo en la 2ª o 3ª vuelta, no la primera vez, para no perderse la cola temática. La disponibilidad no está garantizada — preguntar al cast member al llegar.</span>"
+  },
+  {
+    icon:"🔁", title:"Rider Switch",
+    body: "En TRON, Space Mountain y Hagrid's, si los menores no llegan a la altura mínima: un adulto pide Rider Switch en la entrada. El Subgrupo 3 sube primero en fila normal/Single Pass, mientras un adulto del Subgrupo 2 se queda con los chicos y luego rota para subir sin volver a hacer toda la fila."
+  },
+  {
+    icon:"🚌", title:"Buses y traslados",
+    body: "<b>All-Star Movies → Magic Kingdom:</b> el bus deja directo en los molinetes, sin pasar por el TTC (a diferencia de auto/Uber/Lyft, que sí quedan del otro lado del lago). Ahorra 20-30 min reales.<br><br>" +
+    "<b>Terra Luna (South Campus) → USF/IOA:</b> sumar 20 min de bus. Salir 45-50 min antes de la apertura general, sobre todo el día de Hagrid's.<br><br>" +
+    "<b>Terra Luna → Epic Universe:</b> a pie, sin ajuste de traslado."
+  }
+];
+
+/* ================= RENDER HELPERS ================= */
+
+const tagMeta = {
+  tier1:{cls:"b-tier1", label:"Tier 1"},
+  tier2:{cls:"b-tier2", label:"Tier 2"},
+  single:{cls:"b-single", label:"Single Pass"},
+  early:{cls:"b-early", label:"Early Entry"},
+  noex:{cls:"b-noex", label:"Sin Express"},
+  sr:{cls:"b-sr", label:"Single Rider"}
+};
+
+function renderBadges(tags){
+  return tags.map(t => `<span class="badge ${tagMeta[t].cls}">${tagMeta[t].label}</span>`).join("");
+}
+
+function renderChecklist(){
+  const c = document.getElementById("checklist-container");
+  c.innerHTML = checklistItems.map((txt, i) => `
+    <div class="check-item tap-row" data-idx="${i}" onclick="toggleCheck(this)">
+      <div class="box">✓</div>
+      <div class="txt">${txt}</div>
+    </div>
+  `).join("");
+}
+
+function renderParkStub(p){
+  const badgesHTML = p.badgesBlock.map(b => `
+    <li>
+      <div class="box"></div>
+      <span class="aname">${b.label}</span>
+      <span>${renderBadges(b.tags)}</span>
+    </li>
+  `).join("");
+
+  const groupHTML = p.groupAttractions.map(a => `
+    <li onclick="toggleAttraction(this)">
+      <div class="box"></div>
+      <span class="aname">${a}</span>
+    </li>
+  `).join("");
+
+  const itineraryHTML = p.itinerary.map(([label, text]) => `
+    <p class="body-text"><b>${label}:</b> ${text}</p>
+  `).join("");
+
+  return `
+    <div class="stub">
+      <div class="stub-head tap-row" onclick="toggleStub(this)">
+        <div class="htxt">
+          <div class="park-name">${p.name}</div>
+          <div class="park-sub">${p.sub}</div>
+        </div>
+        <div class="chev">⌄</div>
+      </div>
+      <div class="stub-body">
+        <div class="rope-drop">${p.ropeDrop}</div>
+
+        <div class="block-title">Selección de pases</div>
+        <ul class="attraction-list">${badgesHTML}</ul>
+        <p class="body-text muted">${p.picks}</p>
+
+        <div class="block-title">Atracciones grupales (los 8)</div>
+        <ul class="attraction-list">${groupHTML}</ul>
+
+        <div class="block-title">Itinerario</div>
+        ${itineraryHTML}
+
+        ${p.extraNote ? `<div class="info-box">${p.extraNote}</div>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function renderHalloween(){
+  const c = document.getElementById("halloween-container");
+  c.innerHTML = halloweenEvents.map(ev => `
+    <div class="stub no-notch">
+      <div class="stub-head tap-row" onclick="toggleStub(this)">
+        <div class="htxt">
+          <div class="park-name">${ev.name}</div>
+          <div class="park-sub">${ev.sub}</div>
+        </div>
+        <div class="chev">⌄</div>
+      </div>
+      <div class="stub-body">
+        ${ev.body.map(t => `<p class="body-text">${t}</p>`).join("")}
+        ${ev.order ? `<div class="rope-drop"><b>Orden sugerido:</b> ${ev.order}</div>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderTips(){
+  const c = document.getElementById("tips-container");
+  c.innerHTML = tipCards.map(t => `
+    <div class="tip-card">
+      <h3><span class="ic">${t.icon}</span>${t.title}</h3>
+      <p class="body-text">${t.body}</p>
+    </div>
+  `).join("");
+}
+
+/* ================= INTERACTIONS ================= */
+
+function toggleStub(headEl){
+  const stub = headEl.closest(".stub");
+  const body = stub.querySelector(".stub-body");
+  const isOpen = stub.classList.contains("open");
+
+  if(isOpen){
+    stub.classList.remove("open");
+    body.style.maxHeight = "0px";
+  } else {
+    stub.classList.add("open");
+    body.style.maxHeight = body.scrollHeight + 60 + "px";
+  }
+}
+
+function toggleCheck(el){
+  el.classList.toggle("done");
+}
+
+function toggleAttraction(el){
+  el.classList.toggle("done");
+}
+
+/* ================= NAV / INIT ================= */
+
+function setTab(tab){
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.getElementById("panel-" + tab).classList.add("active");
+  document.querySelectorAll("nav.bottom button").forEach(b => {
+    b.classList.toggle("active", b.dataset.tab === tab);
+  });
+  document.querySelector("main").scrollTop = 0;
+}
+
+document.getElementById("bottomNav").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  setTab(btn.dataset.tab);
+});
+
+// initial render
+renderChecklist();
+document.getElementById("disney-container").innerHTML = disneyParks.map(renderParkStub).join("");
+document.getElementById("universal-container").innerHTML = universalParks.map(renderParkStub).join("");
+renderHalloween();
+renderTips();
+</script>
+</body>
+</html>
