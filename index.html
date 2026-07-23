@@ -435,17 +435,18 @@ const checklistItems = [
   "Epic Universe: confirmar si el Express ya comprado cubre este parque. Dragon Racer's Rally sigue sin Express.",
   "Subgrupo 3: usar Single Rider en Smugglers Run, Everest, Test Track (Disney) y Gringotts, Hulk, VelociCoaster (Universal).",
   "Magic Kingdom: usar el bus de All-Star Movies que deja directo en los molinetes, sin pasar por el TTC.",
-  "MNSSHP: ingreso 4:00 PM. HHN: confirmar si el Subgrupo 2 (familia) asiste o descansa esa noche."
+  "MNSSHP: ingreso 4:00 PM. HHN: confirmar si el Subgrupo 2 (familia) asiste o descansa esa noche.",
+  "Hagrid's (IOA): desde el 1° de julio de 2026 Universal quitó el Express Pass de forma definitiva — hoy es 100% fila estándar (más Single Rider si está disponible). Resolver sí o sí en Early Entry."
 ];
 
 const disneyParks = [
   {
     name: "Magic Kingdom",
     sub: "Rope Drop: Seven Dwarfs / TRON",
-    ropeDrop: "<b>Early Entry (30 min):</b> TRON Lightcycle/Run en fila estándar, o Seven Dwarfs Mine Train si ya tienen Single Pass de TRON para después.",
+    ropeDrop: "<b>Early Entry (30 min):</b> ambas son opciones válidas de Early Entry. Prioricen TRON Lightcycle/Run en fila estándar (más demanda), y si les da el tiempo, sigan directo con Seven Dwarfs Mine Train antes de que el resto del parque abra oficialmente.",
     badgesBlock: [
-      {label:"TRON Lightcycle / Run", tags:["single","sr"]},
-      {label:"Seven Dwarfs Mine Train", tags:["single"]},
+      {label:"TRON Lightcycle / Run", tags:["single","sr","early"]},
+      {label:"Seven Dwarfs Mine Train", tags:["single","early"]},
       {label:"Tiana's Bayou Adventure", tags:["tier1"]},
       {label:"Jungle Cruise", tags:["tier1"]},
       {label:"Peter Pan's Flight", tags:["tier1"]},
@@ -475,14 +476,14 @@ const disneyParks = [
   {
     name: "EPCOT",
     sub: "Rope Drop: Frozen Ever After",
-    ropeDrop: "<b>Early Entry (30 min):</b> Frozen Ever After (Noruega) si World Showcase abre temprano; si no, Spaceship Earth o Test Track primero.",
+    ropeDrop: "<b>Early Entry (30 min):</b> Frozen Ever After (Noruega) es la prioridad si World Showcase abre temprano ese día; si no abre a tiempo, usen esos 30 minutos en Spaceship Earth o Test Track, que también reciben Early Entry y acumulan menos fila que Frozen apenas abre.",
     badgesBlock: [
       {label:"Guardians of the Galaxy: Cosmic Rewind", tags:["single"]},
-      {label:"Frozen Ever After", tags:["tier1"]},
+      {label:"Frozen Ever After", tags:["tier1","early"]},
       {label:"Remy's Ratatouille Adventure", tags:["tier1"]},
-      {label:"Test Track 3.0", tags:["tier1"]},
+      {label:"Test Track 3.0", tags:["tier1","early"]},
       {label:"Soarin' Around the World", tags:["tier2"]},
-      {label:"Spaceship Earth", tags:["tier2"]},
+      {label:"Spaceship Earth", tags:["tier2","early"]},
       {label:"Mission: SPACE", tags:["tier2"]},
       {label:"The Seas with Nemo & Friends", tags:["tier2"]},
       {label:"Living with the Land", tags:["tier2"]}
@@ -505,10 +506,10 @@ const disneyParks = [
   {
     name: "Disney's Hollywood Studios",
     sub: "Rope Drop: Slinky Dog Dash",
-    ropeDrop: "<b>Early Entry (30 min):</b> Ir directo a Slinky Dog Dash en Toy Story Land, salvo que ya tengan Single Pass de Rise of the Resistance reservado para temprano.",
+    ropeDrop: "<b>Early Entry (30 min):</b> Ir directo a Slinky Dog Dash en Toy Story Land (también dentro de Early Entry), salvo que ya tengan Single Pass de Rise of the Resistance reservado para ese horario temprano.",
     badgesBlock: [
       {label:"Star Wars: Rise of the Resistance", tags:["single"]},
-      {label:"Slinky Dog Dash", tags:["tier1"]},
+      {label:"Slinky Dog Dash", tags:["tier1","early"]},
       {label:"Mickey & Minnie's Runaway Railway", tags:["tier1"]},
       {label:"Millennium Falcon: Smugglers Run", tags:["tier1","sr"]},
       {label:"Rock 'n' Roller Coaster Starring The Muppets", tags:["tier1"]},
@@ -533,16 +534,16 @@ const disneyParks = [
   },
   {
     name: "Disney's Animal Kingdom",
-    sub: "Rope Drop: Na'vi River Journey (Pandora)",
-    ropeDrop: "<b>Early Entry (30 min):</b> Na'vi River Journey (o Flight of Passage) en Pandora. <b>Kilimanjaro Safaris NO abre en Early Entry</b> — abre a las 9:00 AM con la apertura general del parque.",
+    sub: "Rope Drop: Avatar Flight of Passage",
+    ropeDrop: "<b>Early Entry (30 min):</b> vayan directo a <b>Avatar Flight of Passage</b> si no tienen Single Pass comprado para más tarde — acumula fila incluso en esos 30 minutos y es la prioridad número uno del parque. Na'vi River Journey tolera mejor una espera más larga, así que déjenla para después de esa primera hora. <b>Kilimanjaro Safaris NO abre en Early Entry</b> — abre a las 9:00 AM con la apertura general del parque.",
     badgesBlock: [
-      {label:"Avatar Flight of Passage", tags:["single"]},
+      {label:"Avatar Flight of Passage", tags:["single","early"]},
       {label:"Na'vi River Journey", tags:["early"]},
       {label:"Expedition Everest", tags:["sr"]},
       {label:"Kilimanjaro Safaris", tags:[]},
       {label:"Kali River Rapids (Agua)", tags:[]}
     ],
-    picks: "<b>Selección inicial (sin tiers):</b> Na'vi River Journey + Expedition Everest + Kilimanjaro Safaris. Flight of Passage es Single Pass: cómprenlo primero.",
+    picks: "<b>Selección inicial (sin tiers):</b> Expedition Everest + Kilimanjaro Safaris. Flight of Passage es Single Pass: cómprenlo primero si no van a rope-dropearlo; si van a resolverlo en Early Entry, no hace falta comprar el Single Pass.",
     groupAttractions: [
       "Festival of the Lion King (Show espectacular con A/C)",
       "Nuevo Show 3D: Zootopia - Better Zoogether! (En el Árbol de la Vida)",
@@ -551,7 +552,7 @@ const disneyParks = [
       "Proyecciones Nocturnas: Tree of Life Awakens"
     ],
     itinerary: [
-      ["Mañana","Pandora (Na'vi River / Flight of Passage) ➔ Africa (Kilimanjaro Safaris a las 9:00 AM, Gorilla Falls) ➔ Asia (Expedition Everest, Kali River Rapids)."],
+      ["Mañana","Pandora (Flight of Passage, luego Na'vi River) ➔ Africa (Kilimanjaro Safaris a las 9:00 AM, Gorilla Falls) ➔ Asia (Expedition Everest, Kali River Rapids)."],
       ["Mediodía","Almuerzo en Satu'li Canteen (Pandora) o Pizzafari. Descanso bajo A/C con Festival of the Lion King o Finding Nemo."],
       ["Tarde/Noche","Nuevo show 3D de Zootopia en el Árbol de la Vida. Repetir Safaris por la tarde (buena luz para fotos). Cierre con proyecciones Tree of Life Awakens."]
     ],
@@ -592,7 +593,7 @@ const universalParks = [
   {
     name: "Islands of Adventure",
     sub: "Rope Drop: Hagrid's Motorbike Adventure",
-    ropeDrop: "<b>Early Park Admission (1h, + 20 min de bus desde Terra Luna):</b> ir directo a Hagrid's (sin Express) — es la única forma real de evitar 90+ min de fila. Al salir, hacer Flight of the Hippogriff o Forbidden Journey ahí mismo en Hogsmeade.",
+    ropeDrop: "<b>Early Park Admission (1h, + 20 min de bus desde Terra Luna):</b> ir directo a Hagrid's — desde el 1° de julio de 2026 es <b>la única forma real</b> de evitar 90+ min de fila, ya que Universal quitó el Express Pass de esta atracción de forma definitiva (antes lo había agregado en mayo 2025 y luego lo revirtió). Al salir, hacer Flight of the Hippogriff o Forbidden Journey ahí mismo en Hogsmeade.",
     badgesBlock: [
       {label:"Hagrid's Magical Creatures Motorbike Adventure", tags:["early","noex"]},
       {label:"Jurassic World VelociCoaster", tags:["sr"]},
@@ -606,7 +607,7 @@ const universalParks = [
       {label:"Dudley Do-Right's Ripsaw Falls (Agua)", tags:[]},
       {label:"Doctor Doom's Fearfall", tags:[]}
     ],
-    picks: "Hagrid's no acepta Express — resolver en Early Entry. Con Express Pass hacen Spider-Man, Forbidden Journey, Kong, VelociCoaster y Hulk en 10-15 min cada uno.",
+    picks: "Hagrid's no acepta Express Pass (removido en forma permanente el 1° de julio de 2026) — resolver exclusivamente en Early Entry, o aceptar una fila larga en algún otro momento del día. Confirmar cerca de la fecha si volvió a habilitarse la fila Single Rider, ya que no está garantizada. Con Express Pass en el resto de las atracciones hacen Spider-Man, Forbidden Journey, Kong, VelociCoaster y Hulk en 10-15 min cada uno.",
     groupAttractions: [
       "Paseo por Hogsmeade + Show de varitas en Ollivanders",
       "Raptor Encounter (Encuentro interactivo con la Velociraptor Blue)",
@@ -618,7 +619,7 @@ const universalParks = [
       ["Mediodía","Almuerzo en Three Broomsticks. Juegos de Agua en Toon Lagoon (Popeye & Dudley) en la hora de más calor. Descanso en Seuss Landing (Seuss Trolley Train)."],
       ["Tarde/Noche","Marvel Super Hero Island (Spider-Man 3D, Hulk, Doctor Doom's Fearfall vía Express). Repetir favoritos y cerrar con el show de luces en el Castillo de Hogwarts."]
     ],
-    extraNote: "🚌 Salir de Terra Luna con 45-50 min reales de anticipación por el traslado. ⚠️ En Popeye y Dudley se mojan al 100%: hacerlos a las 14 hs y llevar ojotas/chanclas o ropa de cambio."
+    extraNote: "🚌 Salir de Terra Luna con 45-50 min reales de anticipación por el traslado. ⚠️ En Popeye y Dudley se mojan al 100%: hacerlos a las 14 hs y llevar ojotas/chanclas o ropa de cambio. ⚠️ Hagrid's: standby-only desde julio 2026 — no cuenten con Express ni den por hecho el Single Rider, revisen la app oficial el mismo día."
   },
   {
     name: "Universal's Epic Universe",
@@ -634,7 +635,7 @@ const universalParks = [
       {label:"Curse of the Werewolf", tags:[]},
       {label:"Dragon Racer's Rally", tags:["noex"]}
     ],
-    picks: "Dragon Racer's Rally es la única atracción sin Express. Confirmar si su Express Pass comprado aplica en Epic Universe (en Epic no hay versión Unlimited y se vende por fecha específica).",
+    picks: "Dragon Racer's Rally sigue siendo la única atracción sin Express en Epic Universe. Confirmar si su Express Pass comprado aplica en Epic Universe (en Epic no hay versión Unlimited y se vende por fecha específica).",
     groupAttractions: [
       "The Untrainable Dragon (Show espectacular en vivo - Isle of Berk)",
       "Le Cirque Arcanus (Show teatral en vivo - Ministry of Magic)",
@@ -669,10 +670,10 @@ const halloweenEvents = [
     name: "HHN",
     sub: "Universal Studios Florida · 35° edición",
     body: [
-      "10 casas embrujadas nuevas — \"Infernal Carnival of Nightmares\" con Jack the Clown y Dr. Oddfellow.",
-      "Casas confirmadas: <i>Jack &amp; Oddfellow: Chaos &amp; Control</i>, <i>Stranger Things</i>, <i>Hellraiser</i>, <i>Evil Dead Burn</i>.",
-      "<b>Adultos/amigos:</b> priorizar casas nuevas y demandadas en la primera hora. Verificar HHN Early Entry en Terra Luna. Dejar zonas de sustos en la calle para el final."
-      
+      "10 casas embrujadas nuevas — \"Infernal Carnival of Nightmares\" con Jack the Clown y Dr. Oddfellow como hilo conductor del evento.",
+      "Casas confirmadas hasta ahora: <i>Jack &amp; Oddfellow: Chaos &amp; Control</i>, <i>Sinners</i> (Club Juke, basada en la película de Ryan Coogler), <i>Hellraiser</i>, <i>Evil Dead Burn</i> y <i>Stranger Things</i> (nueva casa basada en la 5ª y última temporada, desarrollada con Netflix: Casa Wheeler, Laboratorio Nacional de Hawkins, base MAC-Z, Upside Down y Abyss, con Demogorgons y Vecna). Universal todavía no reveló las 5 casas restantes — confirmar la lista completa cerca de la fecha del viaje.",
+      "<b>Adultos/amigos:</b> priorizar casas nuevas y demandadas en la primera hora (Stranger Things y Sinners probablemente sean las de mayor fila por ser las más nuevas/mediáticas). Verificar HHN Early Entry en Terra Luna. Dejar zonas de sustos en la calle para el final.",
+      "Requiere ticket separado del ticket de parque diurno — no está incluido en la admisión regular."
     ]
   }
 ];
@@ -682,12 +683,12 @@ const tipCards = [
     icon:"🟢", title:"Single Rider — Subgrupo 3",
     body: "Herramienta gratuita para saltar buena parte de la fila estándar sin gastar pases pagos, a costa de subir separados.<br><br>" +
     "<b>Disney:</b> Smugglers Run (confiable, casi nunca asiento de piloto), Expedition Everest (más lento desde 2026 por el nuevo sistema de carga par/impar — útil si el standby supera 30-40 min), Test Track (de las más rápidas del resort), Rock 'n' Roller Coaster (variable).<br><br>" +
-    "<b>Universal:</b> Escape from Gringotts, The Incredible Hulk Coaster (casi siempre disponibles), VelociCoaster (más variable).<br><br>" +
+    "<b>Universal:</b> Escape from Gringotts, The Incredible Hulk Coaster (casi siempre disponibles), VelociCoaster (más variable). Hagrid's no tiene Single Rider garantizado — confirmar en el parque el día de la visita.<br><br>" +
     "<span style='color:var(--muted)'>Consejo: usarlo en la 2ª o 3ª vuelta, no la primera vez, para no perderse la cola temática. La disponibilidad no está garantizada — preguntar al cast member al llegar.</span>"
   },
   {
     icon:"🔁", title:"Rider Switch",
-    body: "En TRON, Space Mountain y Hagrid's, si los menores no llegan a la altura mínima: un adulto pide Rider Switch en la entrada. El Subgrupo 3 sube primero en fila normal/Single Pass, mientras un adulto del Subgrupo 2 se queda con los chicos y luego rota para subir sin volver a hacer toda la fila."
+    body: "En TRON, Space Mountain y Hagrid's, si los menores no llegan a la altura mínima: un adulto pide Rider Switch en la entrada. El Subgrupo 3 sube primero en fila normal/Single Pass, mientras un adulto del Subgrupo 2 se queda con los chicos y luego rota para subir sin volver a hacer toda la fila.<br><br><span style='color:var(--muted)'>Nota: con 13 y 14 años, los menores de este grupo superan la altura mínima de todas las atracciones del viaje — este tip queda solo como referencia, no debería hacer falta usarlo.</span>"
   },
   {
     icon:"🚌", title:"Buses y traslados",
